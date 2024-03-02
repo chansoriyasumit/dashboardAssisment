@@ -8,6 +8,7 @@ import {
 } from "@mui/material";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { BASEURL } from "../../../apiRoutes";
 
 interface DateRange {
   minDate: Date | null;
@@ -23,7 +24,7 @@ export const Heading = ({ setCardData }: { setCardData: any }) => {
 
   const fetchState = async () => {
     await axios
-      .get("http://localhost:3003/api/states")
+      .get(BASEURL + "states")
       .then((res) => {
         setStates(res.data);
 
@@ -43,7 +44,7 @@ export const Heading = ({ setCardData }: { setCardData: any }) => {
     const fetchMinMaxDates = async () => {
       try {
         const response: any = await axios.get<DateRange>(
-          `http://localhost:3003/api/state/${selectedState}`
+          BASEURL + `/state/${selectedState}`
         );
 
         const uniqueDates = new Set();
